@@ -1,3 +1,5 @@
+package M2;
+
 import java.util.Arrays;
 
 public class Problem2 {
@@ -18,9 +20,10 @@ public class Problem2 {
         double total = 0;
         String totalOutput = "";
         //TODO add/edit code here
-       
+       for(double i:arr)
+            total+=i;
         //set the double to a string variable
-        totalOutput = total+"";
+        totalOutput = String.format("%.2f",total) +"";
         //end add/edit section
         System.out.println("Total is " + totalOutput);
         System.out.println("End process");
