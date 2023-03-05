@@ -1,4 +1,4 @@
-package M4.Part3;
+package M4.Part3HW;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -72,6 +72,9 @@ public class Server {
     private boolean processCommand(String message, long clientId){
         System.out.println("Checking command: " + message);
 
+        //Nabil El Maalem (nre3) 2/20/2023
+        //What's happening in the coinflip section below is it reads the command "coin flip" and it runs the code which randomly outputs a value
+        //between 0-1, 0 being tails and 1 being Heads. It then outputs the result along with the clientID which is broadcasted to everyone.
         //Start
         if(message.equalsIgnoreCase("coin flip")){
             Random ran = new Random();
@@ -85,6 +88,12 @@ public class Server {
             }
             broadcast(clientId + " Flipped a coin and got " + result, clientId);
         }
+
+        //Nabil El Maalem (nre3) 2/20/2023
+        //Below is the roll die implementation
+        //What's happening in the roll die section below is that it reads the command "roll #d#" which takes the values of the number of dies and number of sides
+        //It then uses parseint to make them ints and uses that to generate the corrsponeding number of dies with each one randomly getting a number that is up to 
+        //the number of sides. That's then added and broadcasted to all with the clientID and what they got.
         else if (message.matches("roll \\d+d\\d+")) {
             String[] msgBreakDown = message.split(" ");
             int numDice = Integer.parseInt(msgBreakDown[1].substring(0, msgBreakDown[1].indexOf("d")));
