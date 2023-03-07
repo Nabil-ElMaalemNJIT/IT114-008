@@ -1,4 +1,4 @@
-package M4.Part3HW;
+package Project;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,21 +12,32 @@ public class ServerThread extends Thread {
     private Socket client;
     private boolean isRunning = false;
     private ObjectOutputStream out;//exposed here for send()
-    private Server server;// ref to our server so we can call methods on it
+    //private Server server;// ref to our server so we can call methods on it
     // more easily
+    private Room currentRoom;
 
     private void info(String message) {
         System.out.println(String.format("Thread[%s]: %s", getId(), message));
     }
 
-    public ServerThread(Socket myClient, Server server) {
+    public ServerThread(Socket myClient, Room room) {
         info("Thread created");
         // get communication channels to single client
         this.client = myClient;
-        this.server = server;
+        this.currentRoom = room;
 
     }
+    protected synchronized Room getCurrentRoom() {
+		return currentRoom;
+	}
 
+	protected synchronized void setCurrentRoom(Room room) {
+		if (room != null) {
+			currentRoom = room;
+		} else {
+			info("Passed in room was null, this shouldn't happen");
+		}
+	}
     public void disconnect() {
         info("Thread being disconnected by server");
         isRunning = false;
@@ -45,6 +56,10 @@ public class ServerThread extends Thread {
             cleanup();
             return false;
         }
+        catch(NullPointerException ne){
+            info("Message was attempted to be sent before outbound stream was opened");
+            return true;//true since it's likely pending being opened
+        }
     }
 
     @Override
@@ -61,7 +76,7 @@ public class ServerThread extends Thread {
             ) {
 
                 info("Received from client: " + fromClient);
-                server.broadcast(fromClient, this.getId());
+                currentRoom.sendMessage(this, fromClient);
             } // close while loop
         } catch (Exception e) {
             // happens when client disconnects

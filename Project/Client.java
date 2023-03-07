@@ -1,4 +1,4 @@
-package M4.Part3HW;
+package Project;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -122,7 +122,9 @@ public class Client {
                             line = si.nextLine();
                             if (!processCommand(line)) {
                                 if (isConnected()) {
-                                    out.writeObject(line);
+                                    if (line != null && line.trim().length() > 0) {
+                                        out.writeObject(line);
+                                    }
 
                                 } else {
                                     System.out.println("Not connected to server");
