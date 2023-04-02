@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Happy Tails Hotel (HTH)</title>
+		<h1><b><center>Happy Tails Hotel<center></b></h1>
+		<style>
+			body {
+  				background-image: url("C:/Users/epicg/Desktop/HTHBackground.jpg");
+			}
+			h1 {
+  				font-weight: bold;
+  				color: black;
+  				font-size: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<style type="text/css">
+        fieldset{
+            border: 3px solid black;
+            width: 620px;
+            margin:auto;
+			background-color: beige;
+			opacity: 92%;
+        }
+        div{
+            text-align: center;
+        }
+		</style>
+		<fieldset>
+			<div>
+				<label for="firstname"><b>Receptionist's First Name:</b></label>
+				<input type="text" id="firstname" name="firstname" placeholder="Example: Mike">
+				<br></br>
+				<label for="lastname"><b>Receptionist's Last Name:</b></label>
+				<input type="text" id="lastname" name="lastname" placeholder="Example: Smith">
+				<br></br>
+				<label for="password"><b>Saleperson's Password:</b></label>
+				<input type="text" id="password" name="password" placeholder="Example: Woof123!">
+				<br></br>
+				<label for="idnumber">Saleperson's ID #:</label>
+				<input type="text" id="idnumber" name="idnumber" placeholder="Example: 123456">
+				<br></br>
+				<label for="phonenumber">Receptionist's Phone #:</label>
+				<input type="text" id="phonenumber" name="phonenumber" placeholder="Example: 111-111-1111">
+				<br></br>
+				<label for="email">Receptionist's Email:</label>
+				<input type="text" id="email" name="email" placeholder="Example: Woof@HTH.com">
+				<br></br>
+				<label for="emailconfirm"> Check the box to request an Email Confirmation:</label>
+				<input type="checkbox" id="emailconfirm" name="emailconfirm">
+				<br></br>
+				<select name="transactiontype">
+					<option value="accountSearch">Search A Receptionist's Accounts</option>
+					<option value="refund">Start a Refund</option>
+					<option value="payment">Make a Payment</option>
+				</select>
+				<br></br>
+				<label for="followUp"> Follow Up Needed</label>
+				<input type="radio" id="followUp" name="followUp">
+				<br></br>
+				<label for="refund"> Request a Refund</label>
+				<input type="checkbox" id="refund" name="refund">
+				<br></br>
+				<label for="checkup"> Request a Checkup</label>
+				<input type="checkbox" id="Checkup" name="Checkup">
+				<br></br>
+				<label for="medRequest"> Request a Prescription Refill</label>
+				<input type="checkbox" id="medRequest" name="medRequest">
+				<label for="submit"></label>
+				<input type="submit" id="submit" name="submit">
+				<label for="reset"></label>
+				<input type="reset" id="reset" name="reset">
+			</div>
+		</fieldset>
+	</body>
+</html>

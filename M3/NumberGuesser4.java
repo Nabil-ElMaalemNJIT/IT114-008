@@ -1,3 +1,4 @@
+package M3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -128,6 +129,31 @@ public class NumberGuesser4 {
             pickNewRandom = true;
         } else {
             System.out.println("That's wrong");
+
+            //Start of Higher/Lower 
+            if (guess>number){
+                System.out.println("Hint: The correct number is lower!");
+            }
+            else{
+                System.out.println("Hint: The correct number is higher!");
+            }
+            //End of Higher/Lower
+
+            //Start of Hot/Cold
+
+            int hotColdDifference = Math.abs(guess - number);
+            if (hotColdDifference>=6){
+                System.out.println("Ice Cold");
+            }
+            else if(hotColdDifference>=4){
+                System.out.println("Warm");
+            }
+            else if (hotColdDifference>=2){
+                System.out.println("Hot");
+            }
+
+            //End of Hot/Cold
+
             strikes++;
             if (strikes >= maxStrikes) {
                 lose();
@@ -147,7 +173,6 @@ public class NumberGuesser4 {
         }
         return guess;
     }
-
     public void start() {
         try (Scanner input = new Scanner(System.in);) {
             System.out.println("Welcome to NumberGuesser4.0");
