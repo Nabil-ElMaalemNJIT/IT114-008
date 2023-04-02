@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function validateUCID(){
+                text=document.getElementById("ucid").value;
+                result=text.match(/(^[a-zA-Z]+\d{3})+$/g);
+                validUCIDs=["has231","abx121","nre312"]
+                if (result){
+                    if (validUCID.includes(result)){
+                    alert("VALID UCID FORMAT AND UCID FOUND");
+                    }
+                    else{
+                        alert("VALID UCID FORMAT BUT INVALID UCID");
+                    }
+                }
+                else {
+                    alert("UCID DOES NOT CONFORM TO VALID FORMAT");
+                }
+                document.getElementById("ucid").value="";
+            }
+        </script>
+    </head>
+    <body>
+        <input type='text' name='ucid' id="ucid" placeholder="Enter UCID" title="A UCID is a sequence of letters followed by zero to three digits."> UCID <br>
+        <br></br>
+        <input type="submit" onclick="validateUCID()" value="Submit">
+    </body>
+</html>

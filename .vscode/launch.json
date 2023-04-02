@@ -5,6 +5,41 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "M4.Part3.Server",
+            "projectName": "IT114-008_ad857dc8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Client",
+            "request": "launch",
+            "mainClass": "M4.Part3.Client",
+            "projectName": "IT114-008_ad857dc8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "M4.Server",
+            "projectName": "IT114-008_ad857dc8"
+        },
+        {
+            "type": "java",
+            "name": "Launch NumberGuesser4",
+            "request": "launch",
+            "mainClass": "M3.NumberGuesser4",
+            "projectName": "IT114-008_ad857dc8"
+        },
+        {
+            "type": "java",
+            "name": "Launch NumberGuesser4",
+            "request": "launch",
+            "mainClass": "M2.NumberGuesser4",
+            "projectName": "IT114-008_ad857dc8"
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",

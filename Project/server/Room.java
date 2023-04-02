@@ -132,7 +132,7 @@ public class Room implements AutoCloseable {
                     case LOGOFF:
                         Room.disconnectClient(client, this);
                         break;
-                    //Nabil El Maalem (nre3) date
+                    //Nabil El Maalem (nre3) 4/2/2023
                     //Roll implementation
                     case ROLL:
                         int numDice = Integer.parseInt(comm2[1].substring(0, comm2[1].indexOf("d")));
@@ -231,19 +231,19 @@ public class Room implements AutoCloseable {
             message = message.substring(2, (message.length()-2));
             message = "<u> " + message + " <u>";
         }
-            else if (message.startsWith("#r") && message.endsWith("r#")){
-                message = message.substring(2, (message.length()-2));
-                message = "<font color = \"red\"> " + message + " </font>";
-            }
-            else if (message.startsWith("#g") && message.endsWith("g#")){
-                message = message.substring(2, (message.length()-2));
-                message = "<font color = \"green\"> " + message + " </font>";
-            }
-            else if (message.startsWith("#b") && message.endsWith("b#")){
-                message = message.substring(2, (message.length()-2));
-                message = "<font color = \"blue\"> " + message + " </font>";
-            }
-            //End
+        else if (message.startsWith("#r") && message.endsWith("r#")){
+            message = message.substring(2, (message.length()-2));
+            message = "<font color = \"red\"> " + message + " </font>";
+        }
+        else if (message.startsWith("#g") && message.endsWith("g#")){
+            message = message.substring(2, (message.length()-2));
+            message = "<font color = \"green\"> " + message + " </font>";
+        }
+        else if (message.startsWith("#b") && message.endsWith("b#")){
+            message = message.substring(2, (message.length()-2));
+            message = "<font color = \"blue\"> " + message + " </font>";
+        }
+        //End
 
         logger.info(String.format("Sending message to %s clients", clients.size()));
         if (sender != null && processCommands(message, sender)) {
