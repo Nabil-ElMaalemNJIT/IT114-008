@@ -1,6 +1,6 @@
 <table><tr><td> <em>Assignment: </em> IT114 Chatroom Milestone 2</td></tr>
 <tr><td> <em>Student: </em> Nabil El Maalem (nre3)</td></tr>
-<tr><td> <em>Generated: </em> 4/2/2023 5:50:07 PM</td></tr>
+<tr><td> <em>Generated: </em> 4/4/2023 6:43:27 PM</td></tr>
 <tr><td> <em>Grading Link: </em> <a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IT114-008-S23/it114-chatroom-milestone-2/grade/nre3" target="_blank">Grading</a></td></tr></table>
 <table><tr><td> <em>Instructions: </em> <p>Implement the features from Milestone2 from the proposal document:&nbsp; <a href="https://docs.google.com/document/d/1ONmvEvel97GTFPGfVwwQC96xSsobbSbk56145XizQG4/view">https://docs.google.com/document/d/1ONmvEvel97GTFPGfVwwQC96xSsobbSbk56145XizQG4/view</a></p>
 </td></tr></table>
@@ -22,16 +22,22 @@
 </table></td></tr>
 <table><tr><td> <em>Deliverable 3: </em> Text Display </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> Show the code for the various style handling via markdown or special characters</td></tr>
-<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229375445-8d6a3aaa-5437-465f-9f62-64428ccfa955.png"/></td></tr>
+<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229937935-840dd68d-55fb-4639-b168-52b76756ceaf.png"/></td></tr>
 <tr><td> <em>Caption:</em> <p>This shows all the code for bold, italics, underline, and color is processed.<br>It is done without having to rely on typing out html tags. <br></p>
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 2: </em> Show source message and the result output in the terminal (note, you won't actually see the styles until Milestone3)</td></tr>
-<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229375602-384f3d4b-0656-4639-a8fd-df9a40e2cbbe.png"/></td></tr>
-<tr><td> <em>Caption:</em> <p>This shows how bold, italics, and underline is displayed. At the bottom in<br>the terminals it shows how the user inputs the delimiters (i.e. *b, *i,<br>etc) and then the message sent out to all the clients is the<br>message with the correct HTML tags surrounding it.<br></p>
+<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229937244-30e7e260-3801-4192-9a14-c7d23f1d9ac2.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>This shows how bold, italics, and underline is displayed. <br></p>
 </td></tr>
-<tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229375819-c1e3ebbc-da40-486f-9dad-9e558dcfab1a.png"/></td></tr>
-<tr><td> <em>Caption:</em> <p>This shows how the colors (red, green, and blue) are processed and displayed.<br>At the bottom in the terminals it shows how the user inputs the<br>delimiters (#r, #g, #b) and then the message is sent out to all<br>the clients with the correct HTML tags surrounding it.<br></p>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229937319-e336c01c-822a-47e5-be04-476bfe3fc6a1.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>This shows how the colors (red, green, and blue) are processed and displayed.<br><br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229937582-a976ffe2-b487-4a26-ba33-e9897cb172a1.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>At the bottom in the terminals it shows how the user inputs the<br>delimiters (#r, #g, #b) and then the message is sent out to all<br>the clients with the correct HTML tags surrounding it.<br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/123345748/229937763-0db60063-2999-4664-8210-7b9d0f632519.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>At the bottom in the terminals it shows how the user inputs the<br>delimiters (i.e. *b, *i, etc) and then the message sent out to all<br>the clients is the message with the correct HTML tags surrounding it.<br></p>
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 3: </em> Explain how you got each style applied</td></tr>
@@ -39,6 +45,6 @@
 </table></td></tr>
 <table><tr><td> <em>Deliverable 4: </em> Misc </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> Include the pull request for Milestone2 to main</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/Nabil-ElMaalemNJIT/IT114-008/pull/9">https://github.com/Nabil-ElMaalemNJIT/IT114-008/pull/9</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/Nabil-ElMaalemNJIT/IT114-008/pull/11">https://github.com/Nabil-ElMaalemNJIT/IT114-008/pull/11</a> </td></tr>
 </table></td></tr>
 <table><tr><td><em>Grading Link: </em><a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IT114-008-S23/it114-chatroom-milestone-2/grade/nre3" target="_blank">Grading</a></td></tr></table>

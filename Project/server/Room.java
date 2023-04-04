@@ -132,7 +132,7 @@ public class Room implements AutoCloseable {
                     case LOGOFF:
                         Room.disconnectClient(client, this);
                         break;
-                    //Nabil El Maalem (nre3) 4/2/2023
+                    //Nabil El Maalem (nre3) 4/4/2023
                     //Roll implementation
                     case ROLL:
                         int numDice = Integer.parseInt(comm2[1].substring(0, comm2[1].indexOf("d")));
@@ -216,33 +216,84 @@ public class Room implements AutoCloseable {
         if (!isRunning) {
             return;
         }
-        //Nabil El Maalem (nre3) date
+        //Nabil El Maalem (nre3) 4/4/23
         //Altered message output
-        if(message.startsWith("*b") && message.endsWith("b*")){
-            message = message.substring(2, (message.length()-2));
-            //message = message.split()
-            message = "<b> " + message + " <b>";
+        String startTag = "";
+        String endTag = "";
+        int startIndex = -1;
+        int endIndex = -1;
+        boolean processed = true;
+        while(processed){
+            processed = false;
+            startIndex = message.indexOf("*b");
+            endIndex = message.indexOf("b*");
+            //bold
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                startTag = "<b>";
+                endTag = "</b>";
+                message = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+2, endIndex) + endTag 
+                + message.substring(endIndex+2); 
+            }
+            //italic
+            startIndex = message.indexOf("*i");
+            endIndex = message.indexOf("i*");
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                startTag = "<i>";
+                endTag = "</i>";
+                message = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+2, endIndex) + endTag 
+                + message.substring(endIndex+2);
+            }
+            //underline
+            startIndex = message.indexOf("*u");
+            endIndex = message.indexOf("u*");
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                startTag = "<u>";
+                endTag = "</u>";
+                message = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+2, endIndex) + endTag 
+                + message.substring(endIndex+2);
+            }
+            //red
+            startIndex = message.indexOf("#r");
+            endIndex = message.indexOf("r#");
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                startTag = "<font color=\"red\">";
+                endTag = "</font>";
+                message = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+2, endIndex) + endTag 
+                + message.substring(endIndex+2);
+            }
+            //green
+            startIndex = message.indexOf("#g");
+            endIndex = message.indexOf("g#");
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                startTag = "<font color=\"green\">";
+                endTag = "</font>";
+                message = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+2, endIndex) + endTag 
+                + message.substring(endIndex+2);
+            }
+            //blue
+            startIndex = message.indexOf("#b");
+            endIndex = message.indexOf("b#");
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                startTag = "<font color=\"blue\">";
+                endTag = "</font>";
+                message = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+2, endIndex) + endTag 
+                + message.substring(endIndex+2);
+            }
         }
-        else if (message.startsWith("*i") && message.endsWith("i*")){
-            message = message.substring(2, (message.length()-2));
-            message = "<i> " + message + " <i>";
-        }
-        else if (message.startsWith("*u") && message.endsWith("u*")){
-            message = message.substring(2, (message.length()-2));
-            message = "<u> " + message + " <u>";
-        }
-        else if (message.startsWith("#r") && message.endsWith("r#")){
-            message = message.substring(2, (message.length()-2));
-            message = "<font color = \"red\"> " + message + " </font>";
-        }
-        else if (message.startsWith("#g") && message.endsWith("g#")){
-            message = message.substring(2, (message.length()-2));
-            message = "<font color = \"green\"> " + message + " </font>";
-        }
-        else if (message.startsWith("#b") && message.endsWith("b#")){
-            message = message.substring(2, (message.length()-2));
-            message = "<font color = \"blue\"> " + message + " </font>";
-        }
+        System.out.println(message);
+    
         //End
 
         logger.info(String.format("Sending message to %s clients", clients.size()));
