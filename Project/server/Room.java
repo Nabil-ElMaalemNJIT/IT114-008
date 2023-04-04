@@ -132,7 +132,7 @@ public class Room implements AutoCloseable {
                     case LOGOFF:
                         Room.disconnectClient(client, this);
                         break;
-                    //Nabil El Maalem (nre3) 4/2/2023
+                    //Nabil El Maalem (nre3) 4/4/2023
                     //Roll implementation
                     case ROLL:
                         int numDice = Integer.parseInt(comm2[1].substring(0, comm2[1].indexOf("d")));
@@ -216,72 +216,12 @@ public class Room implements AutoCloseable {
         if (!isRunning) {
             return;
         }
-        //Nabil El Maalem (nre3) date
+        //Nabil El Maalem (nre3) 4/4/23
         //Altered message output
-        /*
         String startTag = "";
         String endTag = "";
         int startIndex = -1;
         int endIndex = -1;
-        
-        while (true) {
-            if (startIndex != -1 && endIndex != -1) {
-                message = message.substring(0, startIndex) + startTag + message.substring(startIndex + 2, endIndex) + endTag + message.substring(endIndex + 2);
-                startIndex = -1;
-                endIndex = -1;
-            }
-        
-            if (startIndex == -1) {
-                startIndex = message.indexOf("*b");
-                if (startIndex != -1 && message.indexOf("b*", startIndex + 2) != -1) {
-                    startTag = "<b>";
-                    endTag = "</b>";
-                    endIndex = message.indexOf("b*", startIndex + 2);
-                } else {
-                    startIndex = message.indexOf("*i");
-                    if (startIndex != -1 && message.indexOf("i*", startIndex + 2) != -1) {
-                        startTag = "<i>";
-                        endTag = "</i>";
-                        endIndex = message.indexOf("i*", startIndex + 2);
-                    } else {
-                        startIndex = message.indexOf("*u");
-                        if (startIndex != -1 && message.indexOf("u*", startIndex + 2) != -1) {
-                            startTag = "<u>";
-                            endTag = "</u>";
-                            endIndex = message.indexOf("u*", startIndex + 2);
-                        } else {
-                            startIndex = message.indexOf("#r");
-                            if (startIndex != -1 && message.indexOf("r#", startIndex + 2) != -1) {
-                                startTag = "<font color=\"red\">";
-                                endTag = "</font>";
-                                endIndex = message.indexOf("r#", startIndex + 2);
-                            } else {
-                                startIndex = message.indexOf("#g");
-                                if (startIndex != -1 && message.indexOf("g#", startIndex + 2) != -1) {
-                                    startTag = "<font color=\"green\">";
-                                    endTag = "</font>";
-                                    endIndex = message.indexOf("g#", startIndex + 2);
-                                } else {
-                                    startIndex = message.indexOf("#b");
-                                    if (startIndex != -1 && message.indexOf("b#", startIndex + 2) != -1) {
-                                        startTag = "<font color=\"blue\">";
-                                        endTag = "</font>";
-                                        endIndex = message.indexOf("b#", startIndex + 2);
-                                    } else {
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } */
-        String startTag = "";
-        String endTag = "";
-        int startIndex = -1;
-        int endIndex = -1;
-        int lenOfSymbols = 1;
         boolean processed = true;
         while(processed){
             processed = false;
