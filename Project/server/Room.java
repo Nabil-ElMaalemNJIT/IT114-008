@@ -24,6 +24,8 @@ public class Room implements AutoCloseable {
     private final static String LOGOFF = "logoff";
     private final static String FLIP = "flip"; //added
     private final static String ROLL = "roll"; //added
+    private final static String MUTE = "mute"; //added
+    private final static String UNMUTE = "unmute"; //added
     private static Logger logger = Logger.getLogger(Room.class.getName());
 
     public Room(String name) {
@@ -156,6 +158,12 @@ public class Room implements AutoCloseable {
                             flipResult = "Heads";
                         }
                         sendMessage(null, client.getClientName() + " Flipped a coin and got " + flipResult); //trace issue with client.getclientId
+                        break;
+                    case MUTE:
+                        client.mutedUsers.add(comm2[1]);
+                        break;
+                    case UNMUTE:
+                        client.mutedUsers.remove(comm2[1]);
                         break;
                     //End
                     
@@ -291,6 +299,26 @@ public class Room implements AutoCloseable {
                 + message.substring(startIndex+2, endIndex) + endTag 
                 + message.substring(endIndex+2);
             }
+            
+            //Whisper/Private message
+            startIndex = message.indexOf("@");
+            endIndex = message.indexOf(" ");
+            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
+                processed = true;
+                Iterator<ServerThread> iter = clients.iterator();
+                ServerThread client = iter.next(); 
+                long from = sender == null ? Constants.DEFAULT_CLIENT_ID : sender.getClientId();
+
+                String newMessage = message.substring(0, startIndex) + startTag 
+                + message.substring(startIndex+1, endIndex) + endTag 
+                + message.substring(endIndex);
+                if(client.getClientName().equals(message)){
+                    client.sendMessage(from, newMessage);
+                    sender.sendMessage(from, newMessage);
+                    return;
+                }
+            }   
+            
         }
         System.out.println(message);
     
@@ -305,9 +333,13 @@ public class Room implements AutoCloseable {
         Iterator<ServerThread> iter = clients.iterator();
         while (iter.hasNext()) {
             ServerThread client = iter.next();
-            boolean messageSent = client.sendMessage(from, message);
-            if (!messageSent) {
-                handleDisconnect(iter, client);
+            if (!client.mutedUsers.contains(sender.getClientName())){
+                boolean messageSent = client.sendMessage(from, message);
+                if (!messageSent) {
+                    handleDisconnect(iter, client);
+            }
+
+
             }
         }
     }
