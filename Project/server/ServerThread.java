@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 import Project.common.Constants;
 import Project.common.Payload;
@@ -25,6 +26,8 @@ public class ServerThread extends Thread {
     private Room currentRoom;
     private static Logger logger = Logger.getLogger(ServerThread.class.getName());
     private long myClientId;
+
+    public ArrayList<String> mutedUsers = new ArrayList<String>();
 
     public void setClientId(long id) {
         myClientId = id;
