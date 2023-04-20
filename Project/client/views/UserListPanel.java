@@ -1,16 +1,17 @@
 package Project.client.views;
 
 import java.awt.BorderLayout;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -22,6 +23,7 @@ public class UserListPanel extends JPanel {
     JPanel userListArea;
     JPanel wrapper;
     private static Logger logger = Logger.getLogger(UserListPanel.class.getName());
+    private HashMap<Long, Boolean> mutedUsers;
 
     public UserListPanel(ICardControls controls) {
         super(new BorderLayout(10, 10));
@@ -35,13 +37,13 @@ public class UserListPanel extends JPanel {
         JScrollPane scroll = new JScrollPane(content);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        // scroll.setBorder(BorderFactory.createEmptyBorder());
-        // no need to add content specifically because scroll wraps it
 
         userListArea = content;
         this.wrapper = wrapper;
         wrapper.add(scroll);
         this.add(wrapper, BorderLayout.CENTER);
+
+        mutedUsers = new HashMap<Long, Boolean>();
 
         userListArea.addContainerListener(new ContainerListener() {
 
@@ -95,6 +97,12 @@ public class UserListPanel extends JPanel {
         ClientUtils.clearBackground(textContainer);
         // add to container
         content.add(textContainer);
+
+        if (mutedUsers.containsKey(clientId) && mutedUsers.get(clientId)) {
+            JLabel mutedLabel = new JLabel("MUTED");
+            textContainer.add(mutedLabel);
+            mutedLabel.setBounds(textContainer.getWidth() - 50, 0, 50, 20);
+        }
     }
 
     protected void removeUserListItem(long clientId) {

@@ -27,6 +27,7 @@ public class ServerThread extends Thread {
     private static Logger logger = Logger.getLogger(ServerThread.class.getName());
     private long myClientId;
 
+    //list of muted Users
     public ArrayList<String> mutedUsers = new ArrayList<String>();
 
     public void setClientId(long id) {
@@ -81,6 +82,8 @@ public class ServerThread extends Thread {
     }
 
     // send methods
+    //Logger log(getClientId, "error");
+    
 
     public boolean sendReadyStatus(long clientId) {
         Payload p = new Payload();
