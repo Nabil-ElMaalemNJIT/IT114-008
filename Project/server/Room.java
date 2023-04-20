@@ -136,6 +136,7 @@ public class Room implements AutoCloseable {
                         break;
                     //Nabil El Maalem (nre3) 4/4/2023
                     //Roll implementation
+                    //Fix this
                     case ROLL:
                         int numDice = Integer.parseInt(comm2[1].substring(0, comm2[1].indexOf("d")));
                         int numSide = Integer.parseInt(comm2[1].substring(comm2[1].indexOf("d") + 1));
@@ -144,7 +145,8 @@ public class Room implements AutoCloseable {
                         for (int i = 0; i < numDice; i++) {
                             rollResult += ran.nextInt(numSide) + 1;
                         }
-                        sendMessage(null, client.getClientName() + " rolled " + numDice + "d" + numSide + " and got " + rollResult);
+                        Server.INSTANCE.broadcast(client.getClientName() + " rolled " + numDice + "d" + numSide + " and got " + rollResult);
+                        //sendMessage(null, client.getClientName() + " rolled " + numDice + "d" + numSide + " and got " + rollResult);
                         break;
                     //Flip implementation
                     case FLIP:
@@ -157,7 +159,8 @@ public class Room implements AutoCloseable {
                         else {
                             flipResult = "Heads";
                         }
-                        sendMessage(null, client.getClientName() + " Flipped a coin and got " + flipResult); //trace issue with client.getclientId
+                        Server.INSTANCE.broadcast(client.getClientName() + " Flipped a coin and got " + flipResult);
+                        //sendMessage(null, client.getClientName() + " Flipped a coin and got " + flipResult); THIS IS OLD WAY
                         break;
                     case MUTE:
                         client.mutedUsers.add(comm2[1]);
@@ -302,24 +305,23 @@ public class Room implements AutoCloseable {
             
             //Whisper/Private message
             startIndex = message.indexOf("@");
-            endIndex = message.indexOf(" ");
-            if(startIndex > -1 && endIndex > -1 && endIndex > startIndex+2){
-                processed = true;
-                Iterator<ServerThread> iter = clients.iterator();
-                ServerThread client = iter.next(); 
-                long from = sender == null ? Constants.DEFAULT_CLIENT_ID : sender.getClientId();
-
-                String newMessage = message.substring(0, startIndex) + startTag 
-                + message.substring(startIndex+1, endIndex) + endTag 
-                + message.substring(endIndex);
-                if(client.getClientName().equals(message)){
-                    client.sendMessage(from, newMessage);
-                    sender.sendMessage(from, newMessage);
-                    return;
+            if (startIndex > -1) {
+                endIndex = message.indexOf(" ", startIndex);
+                if (endIndex == -1) {
+                    endIndex = message.length();
                 }
-            }   
-            
-        }
+                String clientName = message.substring(startIndex + 1, endIndex);
+                for (ServerThread client : clients) {
+                    if (client != sender && client.getClientName().equals(clientName)) {
+                        client.sendMessage(sender.getClientId(), message);
+                        sender.sendMessage(sender.getClientId(), message);
+                        return;
+                    }
+                }
+            }
+
+
+        } 
         System.out.println(message);
     
         //End
@@ -333,13 +335,13 @@ public class Room implements AutoCloseable {
         Iterator<ServerThread> iter = clients.iterator();
         while (iter.hasNext()) {
             ServerThread client = iter.next();
-            if (!client.mutedUsers.contains(sender.getClientName())){
+            //This is for the muting of a certain user
+            //if (!client.mutedUsers.contains(sender.getClientName())){
+            if (sender == null || !client.mutedUsers.contains(sender.getClientName())){
                 boolean messageSent = client.sendMessage(from, message);
                 if (!messageSent) {
                     handleDisconnect(iter, client);
-            }
-
-
+                }
             }
         }
     }

@@ -81,6 +81,8 @@ public class ServerThread extends Thread {
     }
 
     // send methods
+    //Logger log(getClientId, "error");
+    
 
     public boolean sendReadyStatus(long clientId) {
         Payload p = new Payload();
