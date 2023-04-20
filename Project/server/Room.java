@@ -134,7 +134,7 @@ public class Room implements AutoCloseable {
                     case LOGOFF:
                         Room.disconnectClient(client, this);
                         break;
-                    //Nabil El Maalem (nre3) 4/4/2023
+                    //Nabil El Maalem (nre3) 4/19/2023
                     //Roll implementation
                     //Fix this
                     case ROLL:
@@ -145,8 +145,7 @@ public class Room implements AutoCloseable {
                         for (int i = 0; i < numDice; i++) {
                             rollResult += ran.nextInt(numSide) + 1;
                         }
-                        Server.INSTANCE.broadcast(client.getClientName() + " rolled " + numDice + "d" + numSide + " and got " + rollResult);
-                        //sendMessage(null, client.getClientName() + " rolled " + numDice + "d" + numSide + " and got " + rollResult);
+                        Server.INSTANCE.broadcast("*b" + client.getClientName() + " rolled " + numDice + "d" + numSide + " and got " + rollResult + "b*");
                         break;
                     //Flip implementation
                     case FLIP:
@@ -159,9 +158,9 @@ public class Room implements AutoCloseable {
                         else {
                             flipResult = "Heads";
                         }
-                        Server.INSTANCE.broadcast(client.getClientName() + " Flipped a coin and got " + flipResult);
-                        //sendMessage(null, client.getClientName() + " Flipped a coin and got " + flipResult); THIS IS OLD WAY
+                        Server.INSTANCE.broadcast("*b" + client.getClientName() + " Flipped a coin and got " + flipResult + "b*");
                         break;
+                    //Mute and Unmute implementation
                     case MUTE:
                         client.mutedUsers.add(comm2[1]);
                         break;
@@ -234,6 +233,7 @@ public class Room implements AutoCloseable {
         int startIndex = -1;
         int endIndex = -1;
         boolean processed = true;
+        //Nabil El Maalem NRE3 4/19/23
         while(processed){
             processed = false;
             startIndex = message.indexOf("*b");
