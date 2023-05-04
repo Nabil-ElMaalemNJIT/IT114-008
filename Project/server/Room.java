@@ -389,7 +389,6 @@ public class Room implements AutoCloseable {
         while (iter.hasNext()) {
             ServerThread client = iter.next();
             //This is for the muting of a certain user
-            //if (!client.mutedUsers.contains(sender.getClientName())){
             if (sender == null || !client.mutedUsers.contains(sender.getClientName())){
                 boolean messageSent = client.sendMessage(from, message);
                 if (!messageSent) {

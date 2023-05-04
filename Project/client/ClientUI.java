@@ -220,7 +220,7 @@ public class ClientUI extends JFrame implements IClientEvents, ICardControls {
     public void onMessageReceive(long clientId, String message) {
         if (currentCard.ordinal() >= Card.CHAT.ordinal()) {
             String clientName = mapClientId(clientId);
-            chatPanel.addText(String.format("%s: %s", clientName, message));  //Here maybe
+            chatPanel.addText(String.format("%s: %s", clientName, message));  //Here
         }
     }
 
