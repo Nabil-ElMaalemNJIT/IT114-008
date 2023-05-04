@@ -137,6 +137,28 @@ public class ServerThread extends Thread {
         return send(p);
     }
 
+    //NEW --
+
+    public boolean sendMute(long clientId, String who){
+        Payload p = new Payload();
+        p.setPayloadType(PayloadType.MUTE); //Cannot find symbol here (referring to MUTE)
+        p.setClientId(clientId);
+        p.setClientName(who);
+        p.setMessage(String.format(clientId + "has muted you!"));
+        return send(p);
+    }
+
+    public boolean sendUnmute(long clientId, String who){
+        Payload p = new Payload();
+        p.setPayloadType(PayloadType.UNMUTE); //Cannot find symbol here (referring to UNMUTE)
+        p.setClientId(clientId);
+        p.setClientName(who);
+        p.setMessage(String.format(clientId + "has unmuted you!"));
+        return send(p);
+    }
+
+    //End of NEW --
+
     public boolean sendConnectionStatus(long clientId, String who, boolean isConnected) {
         Payload p = new Payload();
         p.setPayloadType(isConnected ? PayloadType.CONNECT : PayloadType.DISCONNECT);
@@ -165,6 +187,22 @@ public class ServerThread extends Thread {
             return true;// true since it's likely pending being opened
         }
     }
+
+    //NEW
+    public void mutedUser(String userName) { //this is for muted user
+        if (!mutedUsers.contains(userName)) {
+            mutedUsers.add(userName);
+        }
+    }
+    public void unmutedUser(String userName) { //this is for unmuted user
+        if (mutedUsers.contains(userName)) {
+            mutedUsers.remove(userName);
+        }
+    }
+    public boolean isMuted(String userName) { //Made arraylist instead of boolean to fix return type
+        return mutedUsers.contains(userName);
+    }
+    //END NEW
 
     // end send methods
     @Override
@@ -239,4 +277,6 @@ public class ServerThread extends Thread {
         }
         logger.info("Thread cleanup() complete");
     }
+
+
 }
