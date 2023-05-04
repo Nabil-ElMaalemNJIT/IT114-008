@@ -18,6 +18,7 @@ import javax.swing.ScrollPaneConstants;
 
 import Project.client.ClientUtils;
 import Project.client.ICardControls;
+import Project.common.PayloadType;
 
 public class UserListPanel extends JPanel {
     JPanel userListArea;
@@ -97,12 +98,6 @@ public class UserListPanel extends JPanel {
         ClientUtils.clearBackground(textContainer);
         // add to container
         content.add(textContainer);
-
-        if (mutedUsers.containsKey(clientId) && mutedUsers.get(clientId)) {
-            JLabel mutedLabel = new JLabel("MUTED");
-            textContainer.add(mutedLabel);
-            mutedLabel.setBounds(textContainer.getWidth() - 50, 0, 50, 20);
-        }
     }
 
     protected void removeUserListItem(long clientId) {

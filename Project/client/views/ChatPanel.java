@@ -12,7 +12,10 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -60,7 +64,7 @@ public class ChatPanel extends JPanel {
         JTextField textValue = new JTextField();
         input.add(textValue);
         JButton button = new JButton("Send");
-        // lets us submit with the enter key instead of just the button click
+        // lets us submit with the enter key instead of just the button click (MAYBE SOMETHING HERE)
         textValue.addKeyListener(new KeyListener() {
 
             @Override
@@ -243,5 +247,36 @@ public class ChatPanel extends JPanel {
         // scroll down on new message
         JScrollBar vertical = ((JScrollPane) chatArea.getParent().getParent()).getVerticalScrollBar();
         vertical.setValue(vertical.getMaximum());
+
+        
+        //Export Button
+        JButton exportButton = new JButton("Export");
+        this.add(exportButton, BorderLayout.NORTH);
+        //THIS
+        exportButton.addActionListener((event) -> {
+            try {
+                //made it so that it goes through everything using a for loop
+                String chatData = "";
+                for (Component comp : chatArea.getComponents()) {
+                    if (comp instanceof JEditorPane) {
+                        chatData += ((JEditorPane) comp).getText() + "\n"; //broken up using a new line 
+                    }
+                }
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showSaveDialog(this);
+                if (result == JFileChooser.APPROVE_OPTION) { //Google/StackOverFlow helped me with this but from my understanding is APPROVE_OPTION 
+                    File file = fileChooser.getSelectedFile(); //gets the selected file
+                    PrintWriter writer = new PrintWriter(file + ".txt");
+                    writer.write(chatData); //writing data
+                    writer.close(); //making sure to close
+                }
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Failed to export chat data, try again!", e); //just making an exception here so that if it doesn't work
+            }
+        });
+        
+        
     }
+//export button
+    
 }

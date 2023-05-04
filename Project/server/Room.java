@@ -1,5 +1,8 @@
 package Project.server;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -160,13 +163,63 @@ public class Room implements AutoCloseable {
                         }
                         Server.INSTANCE.broadcast("*b" + client.getClientName() + " Flipped a coin and got " + flipResult + "b*");
                         break;
-                    //Mute and Unmute implementation
+
+                    //Start
                     case MUTE:
-                        client.mutedUsers.add(comm2[1]);
-                        break;
+                    if (!client.isMuted(comm2[1]))  //Cannot find symbol here (referring to isMuted)
+                    {
+                        for(ServerThread localclient : clients)
+                        {
+                            if (localclient.getClientName().equals(comm2[1]))
+                            {
+                                localclient.sendMessage(Constants.DEFAULT_CLIENT_ID, client.getClientName() + " muted you.");
+                                break;
+                            }
+                        }
+                        client.mutedUser(comm2[1]);
+                        File muteFile = new File(client.getClientName() + "MutedUsersList.txt");
+                        muteFile.delete();
+                        File muteFile2 = new File(client.getClientName() + "MutedUserList.txt");
+                        FileWriter mutedUsersList = new FileWriter(muteFile2, true);
+                        BufferedWriter bw = new BufferedWriter(mutedUsersList);
+
+                        for(String mutedUser : client.mutedUsers)
+                        {
+                            bw.write(mutedUser);
+                            bw.newLine();
+                        }
+                        bw.close();
+                        mutedUsersList.close();
+                    }
+                    break;
+                    
                     case UNMUTE:
-                        client.mutedUsers.remove(comm2[1]);
-                        break;
+                    if (client.isMuted(comm2[1])) 
+                    {
+                        for(ServerThread localclient : clients)
+                        {
+                            if (localclient.getClientName().equals(comm2[1]))
+                            {
+                                localclient.sendMessage(Constants.DEFAULT_CLIENT_ID, client.getClientName() + " unmuted you.");
+                                break;
+                            }
+                        }
+                        client.unmutedUser(comm2[1]);
+                        File muteFile = new File(client.getClientName() + "MutedUsersList.txt");
+                        muteFile.delete();
+                        File muteFile2 = new File(client.getClientName() + "MutedUserList.txt");
+                        FileWriter mutedUsersList = new FileWriter(muteFile2, true);
+                        BufferedWriter bw = new BufferedWriter(mutedUsersList);
+
+                        for(String mutedUser : client.mutedUsers)
+                        {
+                            bw.write(mutedUser);
+                            bw.newLine();
+                        }
+                        bw.close();
+                        mutedUsersList.close();
+                    }
+                    break;
                     //End
                     
                     default:
